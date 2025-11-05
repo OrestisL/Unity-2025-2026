@@ -14,7 +14,7 @@ public class Shoot : MonoBehaviour
     {
         _cooldown = Cooldown;
 
-        Click = InputSystem.actions.FindAction("Click");
+        Click = InputSystem.actions.FindAction("Attack");
         Click.started += (ctx) =>
         {
             _isShooting = true;
