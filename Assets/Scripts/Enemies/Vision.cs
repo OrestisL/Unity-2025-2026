@@ -1,7 +1,6 @@
-using System;
 using UnityEngine;
 
-public class Vision : MonoBehaviour
+public class Vision : ManagedBehavior
 {
     public float ViewRadius = 10.0f;
     public float ViewDegrees = 60.0f;
@@ -10,13 +9,15 @@ public class Vision : MonoBehaviour
     public Transform VisionStartingPoint;
     public Transform _target;
 
-    private void FixedUpdate()
+    public override void OnFixedUpdate(bool pause)
     {
-        See();
+        See(pause);
     }
 
-    private void See()
+    private void See(bool pause)
     {
+        if (pause) return;
+
         Collider[] potentialTargets = Physics.OverlapSphere(VisionStartingPoint.position, ViewRadius, ValidLayers);
         if (potentialTargets.Length == 0)
         {
@@ -56,4 +57,14 @@ public class Vision : MonoBehaviour
             Gizmos.DrawLine(VisionStartingPoint.position, _target.position);
     }
 #endif
+    public override void OnUpdate(bool pause)
+    {
+        
+    }
+
+    public override void OnLateUpdate(bool pause)
+    {
+        
+    }
+
 }
